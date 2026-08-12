@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, FileText, Users, Flame, Star } from 'lucide-react';
 import { achievements } from '../data/portfolioData';
+import Card3DTilt from './Card3DTilt';
 
 const iconMap = {
   '01': FileText,
@@ -14,23 +15,23 @@ export default function Achievements() {
   return (
     <section id="achievements" className="py-24 px-4 sm:px-8 max-w-7xl mx-auto relative z-10">
       {/* Section Label */}
-      <div className="flex items-center gap-3 text-xs font-mono text-[#8B5CF6] tracking-widest uppercase mb-4">
+      <div className="flex items-center gap-3 text-xs font-mono text-[#4F46E5] tracking-widest uppercase mb-4 font-bold">
         <span>05 — ACHIEVEMENTS</span>
-        <div className="h-[1px] w-12 bg-[#8B5CF6]/30" />
+        <div className="h-[1px] w-12 bg-[#4F46E5]/30" />
       </div>
 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
         <div>
-          <h2 className="text-4xl sm:text-5xl font-bold font-display tracking-tight text-white mb-2">
+          <h2 className="text-4xl sm:text-5xl font-bold font-display tracking-tight text-[#0F172A] mb-2">
             BEYOND THE CLASSROOM
           </h2>
-          <p className="text-sm font-sans text-[#8A8A8A]">
+          <p className="text-sm font-sans text-[#64748B] font-medium">
             Research, team leadership, hackathons & competitive benchmarks.
           </p>
         </div>
       </div>
 
-      {/* Grid */}
+      {/* Grid with 3D Tilt */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {achievements.map((ach, idx) => {
           const Icon = iconMap[ach.number] || Star;
@@ -41,42 +42,48 @@ export default function Achievements() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.12 }}
-              className={`glass-panel p-8 rounded-3xl relative overflow-hidden group transition-all duration-500 ${
-                ach.isSpotlight
-                  ? 'border-[#22D3EE]/60 bg-gradient-to-br from-[#0B0B0F] via-[#0B0B0F] to-[#8B5CF6]/20 shadow-[0_0_40px_rgba(34,211,238,0.2)] md:col-span-2'
-                  : 'border-white/10 hover:border-[#8B5CF6]/40'
-              }`}
+              className={ach.isSpotlight ? 'md:col-span-2' : ''}
             >
-              {ach.isSpotlight && (
-                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] text-black text-[10px] font-mono font-extrabold uppercase tracking-widest flex items-center gap-1">
-                  <Star className="w-3 h-3 fill-black" />
-                  <span>NATIONAL SPOTLIGHT</span>
-                </div>
-              )}
+              <Card3DTilt maxTilt={7} scale={1.02}>
+                <div
+                  className={`glass-panel p-8 rounded-3xl relative overflow-hidden group transition-all duration-500 shadow-md ${
+                    ach.isSpotlight
+                      ? 'border-[#4F46E5]/60 bg-gradient-to-br from-white via-white to-[#4F46E5]/10 shadow-[0_20px_50px_rgba(79,70,229,0.18)]'
+                      : 'border-slate-200 hover:border-[#4F46E5]/40'
+                  }`}
+                >
+                  {ach.isSpotlight && (
+                    <div className="absolute top-4 right-4 px-3.5 py-1 rounded-full bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#06B6D4] text-white text-[10px] font-mono font-extrabold uppercase tracking-widest flex items-center gap-1 shadow-md z-20">
+                      <Star className="w-3 h-3 fill-white" />
+                      <span>NATIONAL SPOTLIGHT</span>
+                    </div>
+                  )}
 
-              <div className="flex items-start gap-4 mb-4">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${
-                  ach.isSpotlight
-                    ? 'bg-[#22D3EE]/20 text-[#22D3EE] border border-[#22D3EE]/40'
-                    : 'bg-[#8B5CF6]/10 text-[#8B5CF6] border border-[#8B5CF6]/30'
-                }`}>
-                  <Icon className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="text-xs font-mono text-[#8A8A8A] block mb-1">
-                    ACHIEVEMENT // {ach.number} • {ach.subtitle}
-                  </span>
-                  <h3 className={`font-bold font-display text-white ${
-                    ach.isSpotlight ? 'text-2xl sm:text-3xl text-gradient' : 'text-xl sm:text-2xl'
-                  }`}>
-                    {ach.title}
-                  </h3>
-                </div>
-              </div>
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${
+                      ach.isSpotlight
+                        ? 'bg-[#4F46E5] text-white border border-[#4F46E5]'
+                        : 'bg-[#4F46E5]/10 text-[#4F46E5] border border-[#4F46E5]/30'
+                    }`}>
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-mono text-[#64748B] font-bold block mb-1">
+                        ACHIEVEMENT // {ach.number} • {ach.subtitle}
+                      </span>
+                      <h3 className={`font-bold font-display text-[#0F172A] ${
+                        ach.isSpotlight ? 'text-2xl sm:text-3xl text-gradient' : 'text-xl sm:text-2xl'
+                      }`}>
+                        {ach.title}
+                      </h3>
+                    </div>
+                  </div>
 
-              <p className="text-sm font-sans text-[#F5F5F5] leading-relaxed pl-16">
-                {ach.description}
-              </p>
+                  <p className="text-sm font-sans text-[#334155] leading-relaxed pl-16 font-normal">
+                    {ach.description}
+                  </p>
+                </div>
+              </Card3DTilt>
             </motion.div>
           );
         })}

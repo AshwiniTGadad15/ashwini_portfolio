@@ -2,16 +2,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Globe2 } from 'lucide-react';
 import { languages } from '../data/portfolioData';
+import Card3DTilt from './Card3DTilt';
 
 export default function Languages() {
   return (
     <section className="py-16 px-4 sm:px-8 max-w-7xl mx-auto relative z-10">
-      <div className="flex items-center gap-3 text-xs font-mono text-[#8B5CF6] tracking-widest uppercase mb-4">
+      <div className="flex items-center gap-3 text-xs font-mono text-[#4F46E5] tracking-widest uppercase mb-4 font-bold">
         <span>COMMUNICATION</span>
-        <div className="h-[1px] w-12 bg-[#8B5CF6]/30" />
+        <div className="h-[1px] w-12 bg-[#4F46E5]/30" />
       </div>
 
-      <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight text-white mb-8">
+      <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight text-[#0F172A] mb-8">
         LANGUAGES SPOKEN
       </h2>
 
@@ -23,18 +24,21 @@ export default function Languages() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="glass-panel p-6 rounded-2xl flex items-center justify-between border-white/10 hover:border-[#22D3EE]/40 transition-colors group"
           >
-            <div className="flex items-center gap-3">
-              <Globe2 className="w-5 h-5 text-[#8B5CF6] group-hover:text-[#22D3EE] transition-colors" />
-              <span className="text-lg font-bold font-display text-white">
-                {lang.name}
-              </span>
-            </div>
+            <Card3DTilt maxTilt={10} scale={1.03}>
+              <div className="glass-panel p-6 rounded-2xl flex items-center justify-between border-slate-200 hover:border-[#4F46E5]/50 transition-colors group shadow-md">
+                <div className="flex items-center gap-3">
+                  <Globe2 className="w-5 h-5 text-[#4F46E5] group-hover:text-[#06B6D4] transition-colors" />
+                  <span className="text-lg font-bold font-display text-[#0F172A]">
+                    {lang.name}
+                  </span>
+                </div>
 
-            <span className="text-xs font-mono text-[#22D3EE] bg-[#22D3EE]/10 px-3 py-1 rounded-full border border-[#22D3EE]/20 font-semibold tracking-wider">
-              {lang.level}
-            </span>
+                <span className="text-xs font-mono text-[#4F46E5] bg-[#4F46E5]/10 px-3 py-1 rounded-full border border-[#4F46E5]/20 font-bold tracking-wider">
+                  {lang.level}
+                </span>
+              </div>
+            </Card3DTilt>
           </motion.div>
         ))}
       </div>

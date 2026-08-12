@@ -6,15 +6,15 @@ export default function SoftSkillsMarquee() {
   const repeatedSkills = [...softSkills, ...softSkills, ...softSkills, ...softSkills];
 
   return (
-    <section className="py-12 bg-[#0B0B0F]/60 border-y border-white/5 relative overflow-hidden z-10">
+    <section className="py-12 bg-white/70 border-y border-slate-200 backdrop-blur-md relative overflow-hidden z-10">
       <div className="flex overflow-hidden select-none">
         <div className="animate-marquee flex items-center gap-8 py-2">
           {repeatedSkills.map((skill, index) => (
             <div key={index} className="flex items-center gap-8 shrink-0">
-              <span className="text-xl sm:text-2xl font-display font-extrabold tracking-widest text-[#8A8A8A] hover:text-white transition-colors uppercase">
+              <span className="text-xl sm:text-2xl font-display font-extrabold tracking-widest text-[#64748B] hover:text-[#7C3AED] transition-colors uppercase">
                 {skill}
               </span>
-              <Sparkles className="w-4 h-4 text-[#8B5CF6] shrink-0" />
+              <Sparkles className="w-4 h-4 text-[#7C3AED] shrink-0" />
             </div>
           ))}
         </div>

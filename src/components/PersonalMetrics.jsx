@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { metrics } from '../data/portfolioData';
+import Card3DTilt from './Card3DTilt';
 
 function AnimatedCounter({ value, duration = 2 }) {
   const [count, setCount] = useState(0);
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
-  // Extract digits from metric string e.g. "03+" -> 3, "500+" -> 500
   const numericTarget = parseInt(value.replace(/[^0-9]/g, ''), 10) || 0;
   const suffix = value.replace(/[0-9]/g, '');
 
@@ -32,7 +32,6 @@ function AnimatedCounter({ value, duration = 2 }) {
     return () => clearInterval(timer);
   }, [isInView, numericTarget, duration]);
 
-  // Format single digits with leading zero e.g. 03
   const formattedCount = numericTarget < 10 ? `0${count}` : count;
 
   return (
@@ -53,31 +52,34 @@ export default function PersonalMetrics() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: idx * 0.12 }}
-            className="glass-panel p-8 rounded-3xl relative overflow-hidden group hover:border-[#8B5CF6]/40 transition-all duration-500"
           >
-            {/* Top Border Gradient Glow Accent */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
+            <Card3DTilt maxTilt={10} scale={1.03}>
+              <div className="glass-panel p-8 rounded-3xl relative overflow-hidden group hover:border-[#4F46E5]/50 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(79,70,229,0.14)]">
+                {/* Top Border Gradient Accent */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#4F46E5] via-[#C026D3] to-[#06B6D4] opacity-80 group-hover:opacity-100 transition-opacity" />
 
-            {/* Metric ID Badge */}
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-xs font-mono text-[#8A8A8A] tracking-wider">METRIC // {metric.id}</span>
-              <div className="w-2 h-2 rounded-full bg-[#22D3EE] group-hover:scale-150 transition-transform" />
-            </div>
+                {/* Metric ID Badge */}
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-xs font-mono text-[#64748B] font-bold tracking-wider">METRIC // {metric.id}</span>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#06B6D4] group-hover:scale-150 transition-transform" />
+                </div>
 
-            {/* Metric Animated Value */}
-            <div className="text-5xl sm:text-6xl font-black text-gradient tracking-tight mb-2">
-              <AnimatedCounter value={metric.value} />
-            </div>
+                {/* Metric Animated Value */}
+                <div className="text-5xl sm:text-6xl font-black text-accent-gradient tracking-tight mb-2 drop-shadow-sm">
+                  <AnimatedCounter value={metric.value} />
+                </div>
 
-            {/* Metric Label */}
-            <h4 className="text-xs font-mono font-bold tracking-widest uppercase text-white mb-1">
-              {metric.label}
-            </h4>
+                {/* Metric Label */}
+                <h4 className="text-xs font-mono font-extrabold tracking-widest uppercase text-[#0F172A] mb-1">
+                  {metric.label}
+                </h4>
 
-            {/* Metric Subtext */}
-            <p className="text-xs text-[#8A8A8A] font-sans">
-              {metric.subtext}
-            </p>
+                {/* Metric Subtext */}
+                <p className="text-xs text-[#64748B] font-sans font-medium">
+                  {metric.subtext}
+                </p>
+              </div>
+            </Card3DTilt>
           </motion.div>
         ))}
       </div>

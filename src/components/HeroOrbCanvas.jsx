@@ -9,8 +9,8 @@ export default function HeroOrbCanvas() {
     const ctx = canvas.getContext('2d');
     let animationFrameId;
 
-    let width = (canvas.width = canvas.parentElement.clientWidth || 400);
-    let height = (canvas.height = canvas.parentElement.clientHeight || 400);
+    let width = (canvas.width = canvas.parentElement.clientWidth || 440);
+    let height = (canvas.height = canvas.parentElement.clientHeight || 440);
 
     const handleResize = () => {
       if (!canvas || !canvas.parentElement) return;
@@ -20,7 +20,7 @@ export default function HeroOrbCanvas() {
 
     window.addEventListener('resize', handleResize);
 
-    // Mouse interactive target
+    // Mouse interactive target for 3D tilt
     let mouse = { x: width / 2, y: height / 2, targetX: width / 2, targetY: height / 2 };
 
     const handleMouseMove = (e) => {
@@ -31,13 +31,14 @@ export default function HeroOrbCanvas() {
 
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Orb particles & nodes
-    const particleCount = 45;
+    // 3D Particles & Nodes
+    const particleCount = 65;
     const particles = [];
-    const codeSnippets = ['<React />', 'Python', 'const fn = () => {}', '010101', 'REST API', 'Flask', 'PostgreSQL', 'DSA', 'CSS3', 'Django'];
+    const codeSnippets = ['<React />', 'Python', 'const fn = () => {}', 'VTU 2027', 'REST API', 'Flask', 'PostgreSQL', 'Tailwind', 'CSE', 'JavaScript', 'Java', 'UI/UX'];
+    const colors = ['#4F46E5', '#7C3AED', '#C026D3', '#06B6D4', '#2563EB'];
 
     for (let i = 0; i < particleCount; i++) {
-      const radius = Math.random() * 120 + 20;
+      const radius = Math.random() * 140 + 35;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(Math.random() * 2 - 1);
       particles.push({
@@ -45,10 +46,10 @@ export default function HeroOrbCanvas() {
         y: radius * Math.sin(phi) * Math.sin(theta),
         z: radius * Math.cos(phi),
         baseRadius: radius,
-        speed: 0.003 + Math.random() * 0.005,
-        size: Math.random() * 2.5 + 1,
-        color: Math.random() > 0.4 ? '#8B5CF6' : '#22D3EE',
-        snippet: Math.random() > 0.75 ? codeSnippets[Math.floor(Math.random() * codeSnippets.length)] : null,
+        speed: 0.003 + Math.random() * 0.004,
+        size: Math.random() * 3.5 + 2,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        snippet: Math.random() > 0.65 ? codeSnippets[Math.floor(Math.random() * codeSnippets.length)] : null,
       });
     }
 
@@ -58,51 +59,80 @@ export default function HeroOrbCanvas() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Smooth mouse interpolation
-      mouse.x += (mouse.targetX - mouse.x) * 0.05;
-      mouse.y += (mouse.targetY - mouse.y) * 0.05;
+      // Smooth mouse interpolation for 3D parallax
+      mouse.x += (mouse.targetX - mouse.x) * 0.06;
+      mouse.y += (mouse.targetY - mouse.y) * 0.06;
 
       const centerX = width / 2 + (mouse.x - width / 2) * 0.15;
       const centerY = height / 2 + (mouse.y - height / 2) * 0.15;
-      const orbRadius = Math.min(width, height) * 0.32;
+      const orbRadius = Math.min(width, height) * 0.34;
 
-      angleX += 0.004;
-      angleY += 0.006;
+      angleX += 0.006;
+      angleY += 0.008;
 
-      // 1. Draw outer glass orb glow & gradient
-      const gradient = ctx.createRadialGradient(
+      // 1. Draw outer 3D bright glass orb ambient lighting
+      const ambientGlow = ctx.createRadialGradient(
         centerX - orbRadius * 0.3,
         centerY - orbRadius * 0.3,
         orbRadius * 0.1,
         centerX,
         centerY,
-        orbRadius * 1.2
+        orbRadius * 1.35
       );
-      gradient.addColorStop(0, 'rgba(139, 92, 246, 0.25)');
-      gradient.addColorStop(0.5, 'rgba(34, 211, 238, 0.12)');
-      gradient.addColorStop(0.85, 'rgba(11, 11, 15, 0.4)');
-      gradient.addColorStop(1, 'rgba(5, 5, 5, 0)');
+      ambientGlow.addColorStop(0, 'rgba(79, 70, 229, 0.18)');
+      ambientGlow.addColorStop(0.35, 'rgba(192, 38, 211, 0.12)');
+      ambientGlow.addColorStop(0.75, 'rgba(6, 182, 212, 0.06)');
+      ambientGlow.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
       ctx.beginPath();
-      ctx.arc(centerX, centerY, orbRadius * 1.1, 0, Math.PI * 2);
-      ctx.fillStyle = gradient;
+      ctx.arc(centerX, centerY, orbRadius * 1.3, 0, Math.PI * 2);
+      ctx.fillStyle = ambientGlow;
       ctx.fill();
 
-      // 2. Glass Rim Circle
+      // 2. Bright Glass Outer Rim Circle with Specular Light Highlight
       ctx.beginPath();
       ctx.arc(centerX, centerY, orbRadius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(79, 70, 229, 0.25)';
+      ctx.lineWidth = 2.5;
       ctx.stroke();
 
-      // Inner subtle cyan rim accent
+      // Specular Top Highlight arc for 3D Glass feel
       ctx.beginPath();
-      ctx.arc(centerX, centerY, orbRadius - 2, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(34, 211, 238, 0.2)';
-      ctx.lineWidth = 0.8;
+      ctx.arc(centerX, centerY, orbRadius - 2, Math.PI * 1.25, Math.PI * 1.75);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.lineWidth = 3;
       ctx.stroke();
 
-      // 3. Render 3D particles and lines
+      // Inner Accent Rim Glow
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, orbRadius - 4, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(6, 182, 212, 0.35)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // 3. Render 3D Rotating Wireframe Latitude Rings for 3D Depth
+      for (let ringIndex = -2; ringIndex <= 2; ringIndex++) {
+        const ringY = (ringIndex / 3) * orbRadius;
+        const ringRadius = Math.sqrt(Math.max(0, orbRadius * orbRadius - ringY * ringY));
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(
+          centerX,
+          centerY + ringY * Math.cos(angleX * 0.5),
+          ringRadius,
+          ringRadius * Math.abs(Math.sin(angleX * 0.5)),
+          angleY * 0.3,
+          0,
+          Math.PI * 2
+        );
+        ctx.strokeStyle = `rgba(124, 58, 237, ${0.15 - Math.abs(ringIndex) * 0.02})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // 4. Render 3D Particles and connecting mesh lines
       const projected = [];
 
       for (let i = 0; i < particles.length; i++) {
@@ -117,36 +147,36 @@ export default function HeroOrbCanvas() {
         let z2 = p.y * Math.sin(angleX) + z1 * Math.cos(angleX);
 
         // 3D Perspective Projection
-        const scale = 300 / (300 + z2);
+        const scale = 340 / (340 + z2);
         const px = centerX + x1 * scale;
         const py = centerY + y1 * scale;
 
         projected.push({ px, py, p, scale, z2 });
       }
 
-      // Sort by Z for correct depth buffering
+      // Sort by Z for correct 3D depth rendering
       projected.sort((a, b) => b.z2 - a.z2);
 
-      // Draw connecting mesh lines between nearby points
+      // Draw 3D connecting mesh lines
       for (let i = 0; i < projected.length; i++) {
         for (let j = i + 1; j < projected.length; j++) {
           const dx = projected[i].px - projected[j].px;
           const dy = projected[i].py - projected[j].py;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 75) {
+          if (dist < 85) {
             ctx.beginPath();
             ctx.moveTo(projected[i].px, projected[i].py);
             ctx.lineTo(projected[j].px, projected[j].py);
-            const alpha = (1 - dist / 75) * 0.15 * projected[i].scale;
-            ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
-            ctx.lineWidth = 0.8;
+            const alpha = (1 - dist / 85) * 0.3 * projected[i].scale;
+            ctx.strokeStyle = `rgba(79, 70, 229, ${alpha})`;
+            ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
       }
 
-      // Draw node dots & code fragments
+      // Draw node dots & bright code fragments
       for (let i = 0; i < projected.length; i++) {
         const { px, py, p, scale } = projected[i];
 
@@ -158,19 +188,19 @@ export default function HeroOrbCanvas() {
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        if (p.snippet && scale > 0.9) {
-          ctx.font = `${Math.floor(10 * scale)}px "JetBrains Mono", monospace`;
-          ctx.fillStyle = 'rgba(245, 245, 245, 0.7)';
-          ctx.fillText(p.snippet, px + 8, py + 3);
+        if (p.snippet && scale > 0.85) {
+          ctx.font = `700 ${Math.floor(11.5 * scale)}px "JetBrains Mono", monospace`;
+          ctx.fillStyle = '#0F172A';
+          ctx.fillText(p.snippet, px + 8, py + 4);
         }
       }
 
-      // Center glowing core dot
+      // Center glowing core node
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
-      ctx.fillStyle = '#22D3EE';
-      ctx.shadowBlur = 15;
-      ctx.shadowColor = '#22D3EE';
+      ctx.arc(centerX, centerY, 6, 0, Math.PI * 2);
+      ctx.fillStyle = '#4F46E5';
+      ctx.shadowBlur = 16;
+      ctx.shadowColor = '#4F46E5';
       ctx.fill();
       ctx.shadowBlur = 0;
 
@@ -187,7 +217,7 @@ export default function HeroOrbCanvas() {
   }, []);
 
   return (
-    <div className="relative w-full h-[360px] md:h-[480px] lg:h-[540px] flex items-center justify-center pointer-events-auto">
+    <div className="relative w-full h-[380px] md:h-[480px] lg:h-[540px] flex items-center justify-center pointer-events-auto">
       <canvas ref={canvasRef} className="w-full h-full block" />
     </div>
   );
