@@ -21,11 +21,11 @@ export default function App() {
   const [isProjectHovered, setIsProjectHovered] = useState(false);
 
   return (
-    <div className="relative bg-[#F8FAFC] text-[#0F172A] min-h-screen selection:bg-[#4F46E5]/20 selection:text-[#4F46E5] overflow-x-hidden">
-      {/* Custom 3D Light Follower Cursor */}
+    <div className="relative bg-[#050508] text-[#F9FAFB] min-h-screen selection:bg-[#F59E0B]/30 selection:text-[#FACC15] overflow-x-hidden">
+      {/* Custom 3D Gold Follower Cursor */}
       <CustomCursor cursorText={cursorText} isProjectHovered={isProjectHovered} />
 
-      {/* Dynamic Light Ambient Background Canvas & 3D Geometry */}
+      {/* Dynamic Gold Ambient Background Canvas & 3D Geometry */}
       <BackgroundCanvas />
 
       {/* Floating Header Navbar */}
@@ -50,7 +50,7 @@ export default function App() {
         <ContactCTA />
       </main>
 
-      {/* Ultra-Clean Light Footer */}
+      {/* Minimal Gold & Obsidian Footer */}
       <Footer />
     </div>
   );

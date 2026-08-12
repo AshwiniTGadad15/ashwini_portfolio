@@ -31,11 +31,11 @@ export default function HeroOrbCanvas() {
 
     window.addEventListener('mousemove', handleMouseMove);
 
-    // 3D Particles & Nodes
+    // 3D Particles & Nodes in Luxury Gold Palette
     const particleCount = 65;
     const particles = [];
     const codeSnippets = ['<React />', 'Python', 'const fn = () => {}', 'VTU 2027', 'REST API', 'Flask', 'PostgreSQL', 'Tailwind', 'CSE', 'JavaScript', 'Java', 'UI/UX'];
-    const colors = ['#4F46E5', '#7C3AED', '#C026D3', '#06B6D4', '#2563EB'];
+    const colors = ['#F59E0B', '#FACC15', '#FDE68A', '#D4AF37', '#EAB308'];
 
     for (let i = 0; i < particleCount; i++) {
       const radius = Math.random() * 140 + 35;
@@ -70,7 +70,7 @@ export default function HeroOrbCanvas() {
       angleX += 0.006;
       angleY += 0.008;
 
-      // 1. Draw outer 3D bright glass orb ambient lighting
+      // 1. Draw outer 3D Gold Ambient Glow
       const ambientGlow = ctx.createRadialGradient(
         centerX - orbRadius * 0.3,
         centerY - orbRadius * 0.3,
@@ -79,38 +79,38 @@ export default function HeroOrbCanvas() {
         centerY,
         orbRadius * 1.35
       );
-      ambientGlow.addColorStop(0, 'rgba(79, 70, 229, 0.18)');
-      ambientGlow.addColorStop(0.35, 'rgba(192, 38, 211, 0.12)');
-      ambientGlow.addColorStop(0.75, 'rgba(6, 182, 212, 0.06)');
-      ambientGlow.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ambientGlow.addColorStop(0, 'rgba(245, 158, 11, 0.22)');
+      ambientGlow.addColorStop(0.35, 'rgba(250, 204, 21, 0.14)');
+      ambientGlow.addColorStop(0.75, 'rgba(217, 119, 6, 0.06)');
+      ambientGlow.addColorStop(1, 'rgba(5, 5, 8, 0)');
 
       ctx.beginPath();
       ctx.arc(centerX, centerY, orbRadius * 1.3, 0, Math.PI * 2);
       ctx.fillStyle = ambientGlow;
       ctx.fill();
 
-      // 2. Bright Glass Outer Rim Circle with Specular Light Highlight
+      // 2. Metallic Gold Outer Rim Circle
       ctx.beginPath();
       ctx.arc(centerX, centerY, orbRadius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(79, 70, 229, 0.25)';
+      ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
       ctx.lineWidth = 2.5;
       ctx.stroke();
 
-      // Specular Top Highlight arc for 3D Glass feel
+      // Specular Top Highlight arc for Gold Metallic Shine
       ctx.beginPath();
       ctx.arc(centerX, centerY, orbRadius - 2, Math.PI * 1.25, Math.PI * 1.75);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.strokeStyle = 'rgba(253, 230, 138, 0.95)';
       ctx.lineWidth = 3;
       ctx.stroke();
 
       // Inner Accent Rim Glow
       ctx.beginPath();
       ctx.arc(centerX, centerY, orbRadius - 4, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(6, 182, 212, 0.35)';
+      ctx.strokeStyle = 'rgba(250, 204, 21, 0.35)';
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      // 3. Render 3D Rotating Wireframe Latitude Rings for 3D Depth
+      // 3. Render 3D Rotating Gold Wireframe Latitude Rings
       for (let ringIndex = -2; ringIndex <= 2; ringIndex++) {
         const ringY = (ringIndex / 3) * orbRadius;
         const ringRadius = Math.sqrt(Math.max(0, orbRadius * orbRadius - ringY * ringY));
@@ -126,13 +126,13 @@ export default function HeroOrbCanvas() {
           0,
           Math.PI * 2
         );
-        ctx.strokeStyle = `rgba(124, 58, 237, ${0.15 - Math.abs(ringIndex) * 0.02})`;
+        ctx.strokeStyle = `rgba(245, 158, 11, ${0.18 - Math.abs(ringIndex) * 0.03})`;
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.restore();
       }
 
-      // 4. Render 3D Particles and connecting mesh lines
+      // 4. Render 3D Particles and connecting Gold mesh lines
       const projected = [];
 
       for (let i = 0; i < particles.length; i++) {
@@ -154,10 +154,10 @@ export default function HeroOrbCanvas() {
         projected.push({ px, py, p, scale, z2 });
       }
 
-      // Sort by Z for correct 3D depth rendering
+      // Sort by Z for correct 3D depth buffering
       projected.sort((a, b) => b.z2 - a.z2);
 
-      // Draw 3D connecting mesh lines
+      // Draw 3D connecting gold mesh lines
       for (let i = 0; i < projected.length; i++) {
         for (let j = i + 1; j < projected.length; j++) {
           const dx = projected[i].px - projected[j].px;
@@ -168,39 +168,39 @@ export default function HeroOrbCanvas() {
             ctx.beginPath();
             ctx.moveTo(projected[i].px, projected[i].py);
             ctx.lineTo(projected[j].px, projected[j].py);
-            const alpha = (1 - dist / 85) * 0.3 * projected[i].scale;
-            ctx.strokeStyle = `rgba(79, 70, 229, ${alpha})`;
+            const alpha = (1 - dist / 85) * 0.32 * projected[i].scale;
+            ctx.strokeStyle = `rgba(245, 158, 11, ${alpha})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
       }
 
-      // Draw node dots & bright code fragments
+      // Draw node dots & gold code fragments
       for (let i = 0; i < projected.length; i++) {
         const { px, py, p, scale } = projected[i];
 
         ctx.beginPath();
         ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.shadowBlur = 10 * scale;
+        ctx.shadowBlur = 12 * scale;
         ctx.shadowColor = p.color;
         ctx.fill();
         ctx.shadowBlur = 0;
 
         if (p.snippet && scale > 0.85) {
           ctx.font = `700 ${Math.floor(11.5 * scale)}px "JetBrains Mono", monospace`;
-          ctx.fillStyle = '#0F172A';
+          ctx.fillStyle = '#FEF08A';
           ctx.fillText(p.snippet, px + 8, py + 4);
         }
       }
 
-      // Center glowing core node
+      // Center glowing gold core node
       ctx.beginPath();
       ctx.arc(centerX, centerY, 6, 0, Math.PI * 2);
-      ctx.fillStyle = '#4F46E5';
-      ctx.shadowBlur = 16;
-      ctx.shadowColor = '#4F46E5';
+      ctx.fillStyle = '#FACC15';
+      ctx.shadowBlur = 18;
+      ctx.shadowColor = '#FACC15';
       ctx.fill();
       ctx.shadowBlur = 0;
 

@@ -23,19 +23,19 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full bg-white/80 backdrop-blur-md border-t border-slate-200 py-12 px-4 sm:px-8 relative z-10">
+    <footer className="w-full bg-[#050508] border-t border-[#F59E0B]/20 py-12 px-4 sm:px-8 relative z-10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* Left Logo & Info */}
         <div className="flex items-center gap-4">
-          <span className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#4F46E5] via-[#7C3AED] to-[#06B6D4] flex items-center justify-center text-xs font-mono text-white font-extrabold shadow-md">
+          <span className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#FDE68A] via-[#F59E0B] to-[#B45309] flex items-center justify-center text-xs font-mono text-black font-extrabold shadow-md">
             {personalInfo.shortName}
           </span>
           <div>
-            <h4 className="text-lg font-bold font-display text-[#0F172A] tracking-widest">
+            <h4 className="text-lg font-bold font-display text-white tracking-widest">
               {personalInfo.shortName}.
             </h4>
-            <p className="text-xs font-mono text-[#64748B] font-semibold">
+            <p className="text-xs font-mono text-[#9CA3AF] font-semibold">
               Designed & built by {personalInfo.name}.
             </p>
           </div>
@@ -47,9 +47,9 @@ export default function Footer() {
             href={personalInfo.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono text-[#64748B] hover:text-[#4F46E5] transition-colors flex items-center gap-1.5 font-bold"
+            className="text-xs font-mono text-[#9CA3AF] hover:text-[#FACC15] transition-colors flex items-center gap-1.5 font-bold"
           >
-            <GithubIcon className="w-4 h-4 text-[#4F46E5]" />
+            <GithubIcon className="w-4 h-4 text-[#F59E0B]" />
             <span>GitHub</span>
           </a>
 
@@ -57,30 +57,30 @@ export default function Footer() {
             href={personalInfo.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono text-[#64748B] hover:text-[#4F46E5] transition-colors flex items-center gap-1.5 font-bold"
+            className="text-xs font-mono text-[#9CA3AF] hover:text-[#FACC15] transition-colors flex items-center gap-1.5 font-bold"
           >
-            <LinkedinIcon className="w-4 h-4 text-[#4F46E5]" />
+            <LinkedinIcon className="w-4 h-4 text-[#F59E0B]" />
             <span>LinkedIn</span>
           </a>
 
           <a
             href={`mailto:${personalInfo.email}`}
-            className="text-xs font-mono text-[#64748B] hover:text-[#4F46E5] transition-colors flex items-center gap-1.5 font-bold"
+            className="text-xs font-mono text-[#9CA3AF] hover:text-[#FACC15] transition-colors flex items-center gap-1.5 font-bold"
           >
-            <Mail className="w-4 h-4 text-[#4F46E5]" />
+            <Mail className="w-4 h-4 text-[#F59E0B]" />
             <span>Email</span>
           </a>
         </div>
 
         {/* Right Back to Top */}
         <div className="flex items-center gap-4">
-          <p className="text-xs font-mono text-[#64748B] font-bold">
+          <p className="text-xs font-mono text-[#9CA3AF] font-bold">
             © 2026 {personalInfo.name}
           </p>
 
           <button
             onClick={scrollToTop}
-            className="p-2.5 rounded-full glass-button text-[#0F172A] hover:text-[#4F46E5] hover:border-[#4F46E5] transition-all shadow-xs"
+            className="p-2.5 rounded-full glass-button text-white hover:text-[#FACC15] hover:border-[#F59E0B] transition-all shadow-sm"
             aria-label="Scroll back to top"
           >
             <ArrowUp className="w-4 h-4" />

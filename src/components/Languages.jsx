@@ -7,12 +7,12 @@ import Card3DTilt from './Card3DTilt';
 export default function Languages() {
   return (
     <section className="py-16 px-4 sm:px-8 max-w-7xl mx-auto relative z-10">
-      <div className="flex items-center gap-3 text-xs font-mono text-[#4F46E5] tracking-widest uppercase mb-4 font-bold">
+      <div className="flex items-center gap-3 text-xs font-mono text-[#F59E0B] tracking-widest uppercase mb-4 font-bold">
         <span>COMMUNICATION</span>
-        <div className="h-[1px] w-12 bg-[#4F46E5]/30" />
+        <div className="h-[1px] w-12 bg-[#F59E0B]/40" />
       </div>
 
-      <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight text-[#0F172A] mb-8">
+      <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight text-white mb-8">
         LANGUAGES SPOKEN
       </h2>
 
@@ -26,15 +26,15 @@ export default function Languages() {
             transition={{ duration: 0.5, delay: idx * 0.1 }}
           >
             <Card3DTilt maxTilt={10} scale={1.03}>
-              <div className="glass-panel p-6 rounded-2xl flex items-center justify-between border-slate-200 hover:border-[#4F46E5]/50 transition-colors group shadow-md">
+              <div className="glass-panel p-6 rounded-2xl flex items-center justify-between border-[#F59E0B]/25 hover:border-[#F59E0B]/60 transition-colors group shadow-lg bg-[#0A0A0F]/85">
                 <div className="flex items-center gap-3">
-                  <Globe2 className="w-5 h-5 text-[#4F46E5] group-hover:text-[#06B6D4] transition-colors" />
-                  <span className="text-lg font-bold font-display text-[#0F172A]">
+                  <Globe2 className="w-5 h-5 text-[#F59E0B] group-hover:text-[#FACC15] transition-colors" />
+                  <span className="text-lg font-bold font-display text-white">
                     {lang.name}
                   </span>
                 </div>
 
-                <span className="text-xs font-mono text-[#4F46E5] bg-[#4F46E5]/10 px-3 py-1 rounded-full border border-[#4F46E5]/20 font-bold tracking-wider">
+                <span className="text-xs font-mono text-[#FACC15] bg-[#F59E0B]/15 px-3 py-1 rounded-full border border-[#F59E0B]/30 font-bold tracking-wider">
                   {lang.level}
                 </span>
               </div>

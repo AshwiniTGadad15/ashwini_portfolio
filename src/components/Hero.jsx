@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Sparkles, Send, Code, Sparkle } from 'lucide-react';
+import { ArrowDown, Sparkles, Send, Award, Compass } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import HeroOrbCanvas from './HeroOrbCanvas';
 import Card3DTilt from './Card3DTilt';
+import goldHeroImage from '../assets/gold_hero_abstract.jpg';
 
 export default function Hero() {
   const animatedStatement = "Building digital experiences with code & curiosity.";
@@ -47,21 +48,21 @@ export default function Hero() {
           {/* Availability Status Badge with 3D Tilt */}
           <Card3DTilt maxTilt={8} scale={1.03} className="w-fit">
             <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-2.5 px-4.5 py-2 rounded-full glass-panel border-[#4F46E5]/30 text-[11px] font-mono text-[#4F46E5] font-bold tracking-wider uppercase shadow-sm">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#06B6D4] animate-ping" />
+              <span className="inline-flex items-center gap-2.5 px-4.5 py-2 rounded-full glass-panel border-[#F59E0B]/40 text-[11px] font-mono text-[#FACC15] font-bold tracking-wider uppercase shadow-md">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B] animate-ping" />
                 <span>{personalInfo.availabilityStatus}</span>
               </span>
             </div>
           </Card3DTilt>
 
           {/* Top Label */}
-          <p className="text-xs sm:text-sm font-mono tracking-widest text-[#475569] uppercase flex items-center gap-2 font-bold">
-            <Sparkles className="w-4 h-4 text-[#4F46E5]" />
+          <p className="text-xs sm:text-sm font-mono tracking-widest text-[#D1D5DB] uppercase flex items-center gap-2 font-bold">
+            <Sparkles className="w-4 h-4 text-[#F59E0B]" />
             <span>{personalInfo.headline}</span>
           </p>
 
           {/* Main Giant Typography */}
-          <h1 className="text-6xl sm:text-7xl md:text-8xl xl:text-9xl font-black font-display tracking-tight text-[#0F172A] leading-none drop-shadow-sm">
+          <h1 className="text-6xl sm:text-7xl md:text-8xl xl:text-9xl font-black font-display tracking-tight text-white leading-none drop-shadow-md">
             ASHWINI
           </h1>
 
@@ -70,7 +71,7 @@ export default function Hero() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-wrap gap-x-3 gap-y-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-accent-gradient leading-tight max-w-2xl"
+            className="flex flex-wrap gap-x-3 gap-y-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-gold-gradient leading-tight max-w-2xl"
           >
             {words.map((word, i) => (
               <motion.span key={i} variants={wordVariants} className="inline-block">
@@ -80,7 +81,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Detailed Subtext */}
-          <p className="text-base sm:text-lg text-[#334155] font-sans leading-relaxed font-medium max-w-xl">
+          <p className="text-base sm:text-lg text-[#E5E7EB] font-sans leading-relaxed font-medium max-w-xl">
             {personalInfo.bioShort}
           </p>
 
@@ -88,7 +89,7 @@ export default function Hero() {
           <div className="flex flex-wrap items-center gap-4 pt-4">
             <a
               href="#projects"
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#06B6D4] text-white font-mono font-bold text-xs tracking-widest uppercase shadow-[0_10px_30px_rgba(79,70,229,0.3)] hover:shadow-[0_15px_40px_rgba(79,70,229,0.45)] transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 group"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F59E0B] to-[#B45309] text-black font-mono font-extrabold text-xs tracking-widest uppercase shadow-[0_10px_35px_rgba(245,158,11,0.4)] hover:shadow-[0_15px_45px_rgba(245,158,11,0.6)] transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 group"
             >
               <span>EXPLORE MY WORK</span>
               <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
@@ -96,22 +97,42 @@ export default function Hero() {
 
             <a
               href="#contact"
-              className="px-8 py-4 rounded-full glass-button font-mono text-xs font-bold tracking-widest uppercase text-[#0F172A] hover:text-[#4F46E5] flex items-center gap-2 transition-all shadow-sm"
+              className="px-8 py-4 rounded-full glass-button font-mono text-xs font-bold tracking-widest uppercase text-white hover:text-[#FACC15] flex items-center gap-2 transition-all shadow-md"
             >
-              <Send className="w-3.5 h-3.5 text-[#4F46E5]" />
+              <Send className="w-3.5 h-3.5 text-[#F59E0B]" />
               <span>LET'S CONNECT</span>
             </a>
           </div>
         </motion.div>
 
-        {/* Right Column — 3D Glass Orb Canvas */}
+        {/* Right Column — 3D Luxury Gold Interactive Visual & WebGL Orb */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="lg:col-span-5 relative flex items-center justify-center animate-float-3d"
+          className="lg:col-span-5 relative flex flex-col items-center justify-center animate-float-3d"
         >
+          {/* Main 3D Canvas Orb */}
           <HeroOrbCanvas />
+
+          {/* Floating Luxury Gold Picture Card Overlay */}
+          <div className="absolute bottom-4 right-2 sm:right-6 w-48 sm:w-56 rounded-2xl glass-panel p-3 border-[#F59E0B]/40 shadow-2xl hidden sm:block z-20">
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-2 border border-[#F59E0B]/30">
+              <img
+                src={goldHeroImage}
+                alt="3D Gold Sculpture"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <span className="absolute bottom-2 left-2 text-[10px] font-mono text-[#FACC15] font-extrabold uppercase">
+                3D TECH ARTWORK
+              </span>
+            </div>
+            <div className="flex items-center justify-between text-[11px] font-mono text-[#D1D5DB] font-bold">
+              <span>EST. 2026</span>
+              <span className="text-[#F59E0B]">VTU CSE</span>
+            </div>
+          </div>
         </motion.div>
       </div>
 
@@ -120,10 +141,10 @@ export default function Hero() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: [0, 8, 0] }}
         transition={{ opacity: { delay: 1.2 }, y: { repeat: Infinity, duration: 2 } }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs font-mono text-[#64748B] font-bold"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs font-mono text-[#9CA3AF] font-bold"
       >
         <span>SCROLL TO EXPLORE</span>
-        <ArrowDown className="w-3.5 h-3.5 text-[#4F46E5]" />
+        <ArrowDown className="w-3.5 h-3.5 text-[#F59E0B]" />
       </motion.div>
     </section>
   );

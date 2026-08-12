@@ -52,25 +52,25 @@ export default function Navbar() {
         <div
           className={`w-full max-w-7xl rounded-full px-6 py-3 flex items-center justify-between transition-all duration-500 ${
             scrolled
-              ? 'glass-panel shadow-[0_10px_35px_rgba(79,70,229,0.12)] border-[#4F46E5]/20 bg-white/85'
+              ? 'glass-panel shadow-[0_10px_35px_rgba(245,158,11,0.15)] border-[#F59E0B]/30 bg-[#0A0A0F]/90'
               : 'bg-transparent border border-transparent'
           }`}
         >
           {/* Logo */}
           <a
             href="#home"
-            className="flex items-center gap-2.5 group text-xl font-bold font-display tracking-wider text-[#0F172A]"
+            className="flex items-center gap-2.5 group text-xl font-bold font-display tracking-wider text-white"
           >
-            <span className="w-8.5 h-8.5 rounded-full bg-gradient-to-tr from-[#4F46E5] via-[#7C3AED] to-[#06B6D4] flex items-center justify-center text-xs font-mono text-white font-extrabold group-hover:scale-110 transition-transform shadow-md">
+            <span className="w-8.5 h-8.5 rounded-full bg-gradient-to-tr from-[#FDE68A] via-[#F59E0B] to-[#B45309] flex items-center justify-center text-xs font-mono text-black font-extrabold group-hover:scale-110 transition-transform shadow-md">
               {personalInfo.shortName}
             </span>
-            <span className="tracking-widest group-hover:text-[#4F46E5] transition-colors">
+            <span className="tracking-widest group-hover:text-[#FACC15] transition-colors">
               {personalInfo.shortName}.
             </span>
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 rounded-full px-4 py-1.5 glass-panel border-slate-200/90 shadow-xs">
+          <nav className="hidden lg:flex items-center gap-1 rounded-full px-4 py-1.5 glass-panel border-[#F59E0B]/25 shadow-sm">
             {navItems.map((item) => {
               const sectionId = item.href.substring(1);
               const isActive = activeSection === sectionId;
@@ -79,13 +79,13 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={`relative px-4 py-1.5 text-xs font-mono tracking-wider font-bold transition-colors duration-300 ${
-                    isActive ? 'text-[#4F46E5]' : 'text-[#64748B] hover:text-[#0F172A]'
+                    isActive ? 'text-[#FACC15]' : 'text-[#D1D5DB] hover:text-white'
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeNavTab"
-                      className="absolute inset-0 bg-[#4F46E5]/12 border border-[#4F46E5]/40 rounded-full"
+                      className="absolute inset-0 bg-[#F59E0B]/18 border border-[#F59E0B]/50 rounded-full"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -99,15 +99,15 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <a
               href="#contact"
-              className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full glass-button text-xs font-mono tracking-wider font-extrabold text-[#0F172A] hover:text-[#4F46E5] group shadow-xs"
+              className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full glass-button text-xs font-mono tracking-wider font-extrabold text-white hover:text-[#FACC15] group shadow-sm"
             >
               <span>LET'S TALK</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#4F46E5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#F59E0B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-full glass-panel text-[#0F172A] hover:text-[#4F46E5] focus:outline-none shadow-xs"
+              className="lg:hidden p-2.5 rounded-full glass-panel text-white hover:text-[#FACC15] focus:outline-none shadow-sm"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -123,7 +123,7 @@ export default function Navbar() {
             initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
             animate={{ opacity: 1, backdropFilter: 'blur(24px)' }}
             exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            className="fixed inset-0 z-40 bg-[#F8FAFC]/96 flex flex-col justify-center px-8 lg:hidden"
+            className="fixed inset-0 z-40 bg-[#050508]/96 flex flex-col justify-center px-8 lg:hidden"
           >
             <div className="flex flex-col gap-6">
               {navItems.map((item, idx) => (
@@ -134,10 +134,10 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.08 }}
-                  className="text-3xl sm:text-4xl font-display font-bold text-[#0F172A] flex items-center justify-between group border-b border-slate-200 pb-4"
+                  className="text-3xl sm:text-4xl font-display font-bold text-white flex items-center justify-between group border-b border-[#F59E0B]/20 pb-4"
                 >
-                  <span className="group-hover:text-[#4F46E5] transition-colors">{item.name}</span>
-                  <span className="text-xs font-mono text-[#64748B] group-hover:text-[#C026D3] font-bold">0{idx + 1}</span>
+                  <span className="group-hover:text-[#FACC15] transition-colors">{item.name}</span>
+                  <span className="text-xs font-mono text-[#F59E0B] font-bold">0{idx + 1}</span>
                 </motion.a>
               ))}
 
@@ -150,13 +150,13 @@ export default function Navbar() {
                 <a
                   href="#contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#06B6D4] text-white font-bold font-mono text-center tracking-wider text-sm flex items-center justify-center gap-2 shadow-lg"
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-[#FDE68A] via-[#F59E0B] to-[#B45309] text-black font-bold font-mono text-center tracking-wider text-sm flex items-center justify-center gap-2 shadow-lg"
                 >
                   <span>LET'S TALK</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
 
-                <p className="text-xs font-mono text-[#64748B] font-bold text-center mt-4">
+                <p className="text-xs font-mono text-[#9CA3AF] font-bold text-center mt-4">
                   Ashwini T Gadad • {personalInfo.email}
                 </p>
               </motion.div>
